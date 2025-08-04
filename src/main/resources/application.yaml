@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+    url: jdbc:postgresql://localhost:5433/salbum_db
+    username: postgres
+    password: 123456
+
+  jpa:
+    database: "POSTGRESQL"
+    show-sql: true
+    # generate-ddl: true
+    #hibernate:
+    #  ddl-auto: "update"
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  application:
+    name="Salbum"
+
+api:
+  security:
+    token:
+      secret: "mysecret"
+
+spotify:
+  client_secret: ${spotify_client_secret}
+  client_id: ${spotify_client_id}
+  api_url: ${spotify_api_url}
+
+lastfm:
+  client_key: ${last_fm_api_key}
+  shared_secret: ${last_fm_shared_secret}
+  api_url: ${last_fm_api_url}
+logging:
+  level:
+    root: DEBUG
+
+#    com:
+#      fasterxml:
+#        jackson: DEBUG
+#    org:
+#      springframework:
+#        security: DEBUG
+#        web:
+#          filter:
+#            CommonsRequestLoggingFilter: DEBUG # Opcional

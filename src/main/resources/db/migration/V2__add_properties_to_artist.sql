@@ -1,0 +1,2 @@
+ALTER TABLE artists ADD COLUMN mbid VARCHAR(255);
+ALTER TABLE artists ADD COLUMN bio_date_published VARCHAR(100);
