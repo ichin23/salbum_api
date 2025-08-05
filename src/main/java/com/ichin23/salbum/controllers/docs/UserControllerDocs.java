@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.UUID;
+
 public interface UserControllerDocs {
     @Operation(
         description = "Find usr by Id",
@@ -28,6 +30,6 @@ public interface UserControllerDocs {
         }
     )
     @GetMapping("/{id}")
-    ResponseEntity<?> getUserById(@PathVariable("id") String id);
+    ResponseEntity<?> getUserById(@PathVariable("id") UUID id);
 
 }

@@ -1,9 +1,12 @@
 package com.ichin23.salbum.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ichin23.salbum.domain.ratings.Ratings;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.springframework.cglib.core.Local;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,6 +59,9 @@ public class User implements UserDetails {
 
     @ManyToMany(mappedBy = "following")
     private Set<User> followers = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Ratings> ratings;
 
     public User(){}
 
@@ -179,5 +185,21 @@ public class User implements UserDetails {
 
     public void setFollowers(Set<User> followers) {
         this.followers = followers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Ratings> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Ratings> ratings) {
+        this.ratings = ratings;
     }
 }

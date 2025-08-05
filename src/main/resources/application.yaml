@@ -35,9 +35,9 @@ lastfm:
   client_key: ${last_fm_api_key}
   shared_secret: ${last_fm_shared_secret}
   api_url: ${last_fm_api_url}
-logging:
-  level:
-    root: DEBUG
+#logging:
+#  level:
+#    root: DEBUG
 
 #    com:
 #      fasterxml:

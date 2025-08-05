@@ -35,6 +35,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/lastfm/albumInfo").permitAll()
                         .requestMatchers(HttpMethod.GET, "/lastfm/fetchArtist").permitAll()
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/ratings/album").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/ratings/album").authenticated()
                         .anyRequest().permitAll()
 
                 )

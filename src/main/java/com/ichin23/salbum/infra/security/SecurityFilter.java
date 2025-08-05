@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -31,9 +32,11 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token =this.recoverToken(request);
         if (token!=null){
             var id =tokenService.validateToken(token);
-            var user = userService.findUserById(id);
+            UUID uuid = UUID.fromString(id);
+            var user = userService.findUserById(uuid);
+            System.out.println(user);
             if (user.isPresent()){
-                var authentication =new UsernamePasswordAuthenticationToken(user, null, user.get().getAuthorities());
+                var authentication =new UsernamePasswordAuthenticationToken(user.get(), null, user.get().getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
@@ -43,6 +46,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected String recoverToken(HttpServletRequest request){
         var authHeader = request.getHeader("Authorization");
         if(authHeader==null) return null;
-        return authHeader.replace("Beares ", "");
+        return authHeader.replace("Bearer ", "");
     }
 }

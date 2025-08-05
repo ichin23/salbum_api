@@ -1,5 +1,6 @@
 package com.ichin23.salbum.domain.music;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ichin23.salbum.converters.json.StringSetConverter;
 import com.ichin23.salbum.domain.album.Album;
 import com.ichin23.salbum.domain.artist.Artist;
@@ -41,6 +42,7 @@ public class Music {
     )
     private Set<Album> albums= new HashSet<>();
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name="artist_music",
@@ -99,6 +101,22 @@ public class Music {
 
     public void setAlbum(Set<Album> album) {
         this.albums = album;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Integer getRank_on_album() {
+        return rank_on_album;
+    }
+
+    public void setRank_on_album(Integer rank_on_album) {
+        this.rank_on_album = rank_on_album;
     }
 
     public void addAlbum(Album album){

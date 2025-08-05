@@ -1,5 +1,6 @@
 package com.ichin23.salbum.domain.artist;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ichin23.salbum.domain.album.Album;
 import com.ichin23.salbum.domain.lastfm.artist.ArtistLastFMResponse;
 import com.ichin23.salbum.domain.music.Music;
@@ -29,9 +30,11 @@ public class Artist implements Serializable {
     private Integer followers_count;
     private String image_url;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "artists", cascade = CascadeType.ALL)
     private Set<Album> albums = new HashSet<>();
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "artists", cascade = CascadeType.ALL)
     private Set<Music> musics = new HashSet<>();
 

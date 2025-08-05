@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("users")
 public class UserController implements UserControllerDocs {
@@ -15,7 +17,7 @@ public class UserController implements UserControllerDocs {
     UserService userService;
 
     @Override
-    public ResponseEntity<?> getUserById(@PathVariable("id") String id){
+    public ResponseEntity<?> getUserById(@PathVariable("id") UUID id){
         var user = userService.findUserById(id);
         if (user.isPresent()){
             return ResponseEntity.ok(new UserDTO(user.get()));

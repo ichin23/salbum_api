@@ -1,9 +1,12 @@
 package com.ichin23.salbum.domain.album;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ichin23.salbum.converters.json.MapJsonConverter;
 import com.ichin23.salbum.converters.json.StringSetConverter;
 import com.ichin23.salbum.domain.artist.Artist;
 import com.ichin23.salbum.domain.music.Music;
+import com.ichin23.salbum.domain.ratings.Ratings;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -37,6 +40,7 @@ public class Album implements Serializable {
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Object> streammings = new HashMap<String, Object>();
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "artist_album",
@@ -47,6 +51,9 @@ public class Album implements Serializable {
 
     @ManyToMany(mappedBy = "albums", cascade = CascadeType.ALL) // "albums" deve corresponder ao nome da propriedade Set na classe Music
     private Set<Music> musics = new HashSet<>(); // Nome da coleção no Album
+
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Ratings> ratings;
 
     public void addArtist(Artist artist){
         this.artists.add(artist);
@@ -129,5 +136,13 @@ public class Album implements Serializable {
 
     public void setMusics(Set<Music> musics) {
         this.musics = musics;
+    }
+
+    public Set<Ratings> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Ratings> ratings) {
+        this.ratings = ratings;
     }
 }
