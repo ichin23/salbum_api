@@ -2,9 +2,9 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     platform: postgres
-    url: jdbc:postgresql://localhost:5433/salbum_db
-    username: postgres
-    password: 123456
+    url: ${database_url}
+    username: ${database_username}
+    password: ${database_password}
 
   jpa:
     database: "POSTGRESQL"
@@ -24,7 +24,7 @@ spring:
 api:
   security:
     token:
-      secret: "mysecret"
+      secret: ${secret_token_security}
 
 spotify:
   client_secret: ${spotify_client_secret}
