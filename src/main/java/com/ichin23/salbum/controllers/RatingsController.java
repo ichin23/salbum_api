@@ -1,5 +1,6 @@
 package com.ichin23.salbum.controllers;
 
+import com.ichin23.salbum.controllers.docs.RatingsControllerDocs;
 import com.ichin23.salbum.domain.ratings.dto.RatingInputDTO;
 import com.ichin23.salbum.domain.ratings.dto.RatingOutputDTO;
 import com.ichin23.salbum.domain.user.User;
@@ -18,11 +19,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("ratings")
-public class RatingsController {
+public class RatingsController implements RatingsControllerDocs {
 
     @Autowired
     RatingsService ratingsService;
 
+    @Override
     @PostMapping("/album")
     public ResponseEntity<?> createRating(@RequestBody RatingInputDTO data, @AuthenticationPrincipal User currentUser){
         try{

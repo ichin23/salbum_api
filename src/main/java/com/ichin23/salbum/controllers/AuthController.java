@@ -40,6 +40,7 @@ public class AuthController implements AuthControllerDocs {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Override
     @PostMapping("/refreshToken")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenInput data){
         try{
@@ -69,6 +70,7 @@ public class AuthController implements AuthControllerDocs {
     }
 
     @Override
+    @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserLoginDTO data){
         try{
             var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());

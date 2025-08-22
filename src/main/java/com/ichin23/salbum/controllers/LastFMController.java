@@ -1,6 +1,7 @@
 package com.ichin23.salbum.controllers;
 
 import com.ichin23.salbum.services.lastfm.LastFMService;
+import com.ichin23.salbum.controllers.docs.LastFMControllerDocs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("lastfm")
-public class LastFMController {
+public class LastFMController implements LastFMControllerDocs {
     @Autowired
     LastFMService lastFMService;
 
+    @Override
     @GetMapping("/search")
     public ResponseEntity<?> getArtist(
             @RequestParam(value = "q") String q
@@ -22,6 +24,7 @@ public class LastFMController {
         return ResponseEntity.ok(result);
     }
 
+    @Override
     @GetMapping("/searchAlbum")
     public ResponseEntity<?> getAlbum(
             @RequestParam(value = "q") String q
@@ -39,6 +42,8 @@ public class LastFMController {
         var result = lastFMService.getAlbumInfo(album, artist);
         return ResponseEntity.ok(result);
     }
+
+    @Override
     @GetMapping("/fetchArtist")
     public ResponseEntity<?> fetchArtist(
             @RequestParam(value = "artist") String artist

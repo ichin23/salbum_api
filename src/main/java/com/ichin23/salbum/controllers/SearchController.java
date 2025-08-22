@@ -1,5 +1,6 @@
 package com.ichin23.salbum.controllers;
 
+import com.ichin23.salbum.controllers.docs.SearchControllerDocs;
 import com.ichin23.salbum.services.AlbumService;
 import com.ichin23.salbum.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("search")
-public class SearchController {
+public class SearchController implements SearchControllerDocs {
     @Autowired
     SearchService searchService;
 
+    @Override
     @GetMapping
     public ResponseEntity<?> search(
             @RequestParam("q") String query

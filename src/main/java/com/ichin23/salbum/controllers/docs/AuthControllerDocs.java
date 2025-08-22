@@ -1,5 +1,7 @@
 package com.ichin23.salbum.controllers.docs;
 
+import com.ichin23.salbum.domain.refreshToken.dto.RefreshTokenInput;
+import com.ichin23.salbum.domain.refreshToken.dto.RefreshTokenOutput;
 import com.ichin23.salbum.domain.user.dto.TokenResponseDTO;
 import com.ichin23.salbum.domain.user.dto.UserDTO;
 import com.ichin23.salbum.domain.user.dto.UserLoginDTO;
@@ -14,6 +16,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface AuthControllerDocs {
+
+    @Operation(
+            description = "Generate new token",
+            tags = {"Auth"},
+            responses = {
+                    @ApiResponse(
+                            description = "success",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                            schema =@Schema(implementation = RefreshTokenOutput.class)
+                                    )
+                            }
+                    )
+            }
+    )
+    ResponseEntity<?> refreshToken(@RequestBody RefreshTokenInput data);
 
     @Operation(
             description = "Create user on database",
@@ -31,7 +51,6 @@ public interface AuthControllerDocs {
                 )
             }
     )
-    @PostMapping("/register")
     ResponseEntity<?> registerUser(@RequestBody UserRegisterDTO data);
 
     @Operation(
@@ -50,6 +69,7 @@ public interface AuthControllerDocs {
                     )
             }
     )
-    @PostMapping("/login")
     ResponseEntity<?> loginUser(@RequestBody UserLoginDTO data);
+
+
 }

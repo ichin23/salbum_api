@@ -26,6 +26,12 @@ api:
     token:
       secret: ${secret_token_security}
 
+musicbrainz:
+  api_url: ${musicbrainz_api_url}
+
+release_images:
+  api_url: ${release_images_api_url}
+
 spotify:
   client_secret: ${spotify_client_secret}
   client_id: ${spotify_client_id}
